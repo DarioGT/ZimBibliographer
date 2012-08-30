@@ -81,15 +81,13 @@ if __name__ == '__main__':
     zim_file_path = None
     
     try:
-        opts, args = getopt.getopt(sys.argv[1:],"hd:f:", ['help', 'clean', 'cache'])
+        opts, args = getopt.getopt(sys.argv[1:],"hb:d:f:", ['help'])
     except getopt.GetoptError:
         logging.critical('Wrong option')
         usage() 
         sys.exit(2)
 
         
-    action_make_archive = False
-    action_clean_archive = False
     checktime = True
     
     #FIXME : review args...
@@ -102,15 +100,12 @@ if __name__ == '__main__':
             pass
             #TODO
             #logging.basicConfig(filename=log_filename, filemode='w', level=logging.DEBUG)
-        elif opt in '--clean':
-            logging.debug("Option --clean")
-            action_clean_archive = True
-        elif opt in '--cache':
-            logging.debug("Option --cache")
-            action_make_archive = True
         elif opt in '--no-timecheck':
             logging.debug("Option --no-timecheck")
             checktime = False
+        elif opt in '-b':
+            logging.debug("Option -b: " + str(arg))
+            bibfile = os.path.realpath(arg) 
         elif opt in '-d':
             logging.debug("Option -d: " + str(arg))
             zim_root = os.path.realpath(arg) 
@@ -119,20 +114,25 @@ if __name__ == '__main__':
             zim_file_path = os.path.realpath(arg) 
 
 
-    if action_make_archive:
         
-        if zim_file_path == None: 
-            zim_files = zimnotes.get_zim_files(zim_root)
-        else:
-            zim_files = [zim_file_path]
+    if zim_file_path == None: 
+        zim_files = zimnotes.get_zim_files(zim_root)
+    else:
+        zim_files = [zim_file_path]
+    
 
-        logging.info('Processing zim files')
-        from ZimBibliographer.processtext import process_text
-        from ZimBibliographer.timechecker import TimeChecker
+    if bibfile == None:
+        logging.critical('missing bibtex option')
+        #TODO
+        sys.exit(1)
 
-        timechecker = TimeChecker('~/.zimbibliographer/time.db', zim_root)
-        #remove zimroot
-        zimnotes.process_zim_file(timechecker, zim_root, zim_files, process_text, checktime, 1, '/tmp' )
+    logging.info('Processing zim files')
+    from ZimBibliographer.processtext import process_text
+    from ZimBibliographer.timechecker import TimeChecker
+    
+    timechecker = TimeChecker('~/.zimbibliographer/time.db', zim_root)
+    #remove zimroot
+    zimnotes.process_zim_file(timechecker, zim_root, zim_files, process_text, checktime, 1, '/tmp' ) #FIXME: last arg
 
 
     utils.release_pidfile(lock_file)
