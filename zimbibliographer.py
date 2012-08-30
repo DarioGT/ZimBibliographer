@@ -132,7 +132,7 @@ if __name__ == '__main__':
     
     timechecker = TimeChecker('~/.zimbibliographer/time.db', zim_root)
     #remove zimroot
-    zimnotes.process_zim_file(timechecker, zim_root, zim_files, process_text, checktime, 1, bibfile ) #FIXME: last arg
+    zimnotes.process_zim_file(timechecker, zim_root, zim_files, process_text, checktime, 4, bibfile ) #FIXME: last arg
 
 
     utils.release_pidfile(lock_file)
