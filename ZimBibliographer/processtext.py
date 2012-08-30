@@ -3,10 +3,17 @@
 
 import re
 
-def process_text(original_text):
+def process_text(original_text, foo):
     """
     Core function: process the whole text
     * 
+
+    original_text : 
+    foo : TODO
+
+    return
+    ------
+    copy_text
     """
     citecommand = re.compile('cite{[0-9a-zA-Z]+}')
 
@@ -17,3 +24,4 @@ def process_text(original_text):
     for key in keys:
         print(key)
 
+    return copy_text

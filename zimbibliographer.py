@@ -127,7 +127,12 @@ if __name__ == '__main__':
             zim_files = [zim_file_path]
 
         logging.info('Processing zim files')
-        #zimnotes.process_zim_file(zim_root, zim_files, zim_archive_path, checktime)
+        from ZimBibliographer.processtext import process_text
+        from ZimBibliographer.timechecker import TimeChecker
+
+        timechecker = TimeChecker('~/.zimbibliographer/time.db', zim_root)
+        #remove zimroot
+        zimnotes.process_zim_file(timechecker, zim_root, zim_files, process_text, checktime, 1, '/tmp' )
 
 
     utils.release_pidfile(lock_file)
