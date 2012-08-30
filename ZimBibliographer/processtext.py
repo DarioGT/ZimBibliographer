@@ -6,14 +6,16 @@ import re
 def process_text(original_text, foo):
     """
     Core function: process the whole text
-    * 
+    * Track cite{} keys
+    * Replace them
+    * write the modified text
 
     original_text : 
     foo : TODO
 
     return
     ------
-    copy_text
+    modified text
     """
     citecommand = re.compile('cite{[0-9a-zA-Z]+}')
 
@@ -23,5 +25,7 @@ def process_text(original_text, foo):
 
     for key in keys:
         print(key)
+        #TODO
+        #Modify the text. Use foo for bibtex data
 
     return copy_text
