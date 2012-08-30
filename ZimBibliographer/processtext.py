@@ -62,6 +62,8 @@ def process_text(original_text, bibtex):
         #For the second case, jabref write comments with metadata
         path = re.sub(':(.*):[a-zA-Z]+', "\\1", path)
         #TODO deal with this second case... :(
+
+        #TODO non expanded path is suitable
         if path.startswith('/'):
             pass
         elif path.startswith('~/'):
