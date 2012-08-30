@@ -3,7 +3,9 @@
 
 import re
 
-def process_text(original_text, foo):
+from ZimBibliographer.bibtexparser import BibTexParser
+
+def process_text(original_text, bibtex):
     """
     Core function: process the whole text
     * Track cite{} keys
@@ -11,13 +13,22 @@ def process_text(original_text, foo):
     * write the modified text
 
     original_text : 
-    foo : TODO
+    bibtex : bibtex
 
     return
     ------
     modified text
     """
-    citecommand = re.compile('cite{[0-9a-zA-Z]+}')
+
+    with open(bibtex, 'r') as bibfile:
+        bibliography = BibTexParser(bibfile)
+
+    entries = bibliography.parse()[0] 
+    entries_hash = {}
+    for entry in entries:
+        entries_hash[entry['id']] = entry
+
+    citecommand = re.compile('cite{([0-9a-zA-Z]+)}')
 
     copy_text = original_text
 
@@ -25,6 +36,7 @@ def process_text(original_text, foo):
 
     for key in keys:
         print(key)
+        print(entries_hash[key]['file'])
         #TODO
         #Modify the text. Use foo for bibtex data
 
