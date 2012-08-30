@@ -28,6 +28,11 @@ def process_text(original_text, bibtex):
     # Bibtex
     ###########
     with open(bibtex, 'r') as bibfile:
+        bibtex_content = bibfile.read()
+    filedirectory = re.findall('@comment{jabref-meta: fileDirectory:(.+?);}', bibtex_content, re.DOTALL)
+    filedirectory = re.sub('\n', '', filedirectory[0])
+
+    with open(bibtex, 'r') as bibfile:
         bibliography = BibTexParser(bibfile)
 
     entries = bibliography.parse()[0] 
@@ -46,13 +51,24 @@ def process_text(original_text, bibtex):
     ###########
     for key in keys:
         print(key)
-        path = entries_hash[key]['file']
+        try:
+            path = entries_hash[key]['file']
+        except KeyError:
+            print('Keyerror !')
+            continue #next key
 
         #Jabref codes path like ":/tmp/file.pdf:PDF"
         # or ":file.pdf:PDF"
         #For the second case, jabref write comments with metadata
         path = re.sub(':(.*):[a-zA-Z]+', "\\1", path)
         #TODO deal with this second case... :(
+        if path.startswith('/'):
+            pass
+        elif path.startswith('~/'):
+            pass
+        else:
+            path = os.path.join(filedirectory, path) 
+
 
 
         #TODO
