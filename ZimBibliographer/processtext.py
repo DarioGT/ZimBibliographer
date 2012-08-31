@@ -74,15 +74,19 @@ def process_text(original_text, bibtex):
         print(key)
         try:
             path = entries_hash[key]['file']
-            journal = entries_hash[key]['journal']['name']
+            if entries_hash[key]['type'] == 'article':
+                pubtype = entries_hash[key]['journal']['name']
+            else:
+                pubtype = entries_hash[key]['type']
         except KeyError:
             print('Keyerror !')
             continue #next key
 
         #Jabref codes path like ":/tmp/file.pdf:PDF"
-        # or ":file.pdf:PDF"
-        #For the second case, jabref write comments with metadata
-        path = re.sub(':(.*):[a-zA-Z]+', "\\1", path)
+        # or ":file.pdf:PDF" or ":file.pdf:label:PDF"
+        #For the second case, jabref write comments with metadata (filepath)
+        #path = re.sub('^:(.*):[A-Z]+', "\\1", path)
+        path = re.sub('^(?:.*):(.*):[A-Z]+', "\\1", path)
 
         if path.startswith('/'):
             path = get_unexpanded_path(path)
@@ -99,7 +103,7 @@ def process_text(original_text, bibtex):
 
         #Modify the text. Use foo for bibtex data
         cite = 'cite{' + key + '}'
-        internal_link = '[[' + str(path) + '|' + key + ', ' + journal + ']]' #FIXME
+        internal_link = '[[' + str(path) + '|' + key + ', ' + pubtype + ']]' #FIXME
         copy_text = re.sub(cite, internal_link, copy_text)
 
     return copy_text
