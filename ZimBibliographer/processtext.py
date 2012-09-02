@@ -3,37 +3,12 @@
 
 import re
 import os.path
-from ZimBibliographer.bibtexparser import BibTexParser
+
 from ZimBibliographer.utils import get_unexpanded_path
 
+from ZimBibliographer.bibtexutils import get_filedirectory
+from ZimBibliographer.bibtexutils import get_entries
 
-def get_filedirectory(bibtex):
-    """
-    Get filedirectory from the bibfile
-    (jabref)
-    """
-    with open(bibtex, 'r') as bibfile:
-        bibtex_content = bibfile.read()
-    filedirectory = re.findall('@comment{jabref-meta: fileDirectory:(.+?);}', bibtex_content, re.DOTALL)
-    filedirectory = re.sub('\n', '', filedirectory[0])
-    if filedirectory == []:
-        return None
-
-    return filedirectory
-
-
-def get_entries(bibtex):
-    """
-    Return entries from the bibfile
-    """
-    with open(bibtex, 'r') as bibfile:
-        bibliography = BibTexParser(bibfile)
-
-    entries = bibliography.parse()[0] 
-    entries_hash = {}
-    for entry in entries:
-        entries_hash[entry['id']] = entry
-    return entries_hash
 
 
 def process_text(original_text, bibtex):
@@ -103,7 +78,7 @@ def process_text(original_text, bibtex):
 
         #Modify the text. Use foo for bibtex data
         cite = 'cite{' + key + '}'
-        internal_link = '[[' + str(path) + '|' + key + ', ' + pubtype + ']]' #FIXME
+        internal_link = '[[' + str(path) + '|' + key + ', ' + pubtype + ']]'
         copy_text = re.sub(cite, internal_link, copy_text)
 
     return copy_text
