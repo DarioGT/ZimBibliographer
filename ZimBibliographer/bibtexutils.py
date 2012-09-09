@@ -6,6 +6,7 @@ Functions using (wrapping) bibtexparser
 """
 
 from ZimBibliographer.bibtexparser import BibTexParser
+import re
 
 def get_filedirectory(bibtex):
     """
