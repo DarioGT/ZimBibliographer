@@ -18,7 +18,7 @@
 #System...
 import sys
 import os
-import getopt
+import argparse
 
 import logging
 
@@ -29,39 +29,31 @@ from ZimBibliographer import utils
 #from ZimArchivist import timechecker
 #from ZimArchivist import archive
 
-
+from ZimBibliographer import info
 
 #############
 # Main
 #############
 
-#FIXME
-def usage():
-    """ Print usage... """
-    usage = """
-    zimarchivist --cache -d ~/Notes
-
-    Actions:
-        --cache: make a cache
-        Arg: 
-            -d: Zim notes directory
-        Option:
-            -f: Zim file path (Otherwise, the notebook is processed)
-
-
-        --clean: clean the cache by removing unnecessary archives
-        Arg: 
-            -d: Zim notes directory
-
-     Other options:
-        --no-timecheck: Do not check if zim file has been modified
-                        since the last time.
-    """
-
-    print(usage)
-
-
 if __name__ == '__main__':
+
+
+    parser = argparse.ArgumentParser(description=info.SHORT_DESCRIPTION,
+                     epilog='')
+
+    parser.add_argument('--version', action='version', version=info.NAME + ' ' + info.VERSION) 
+    parser.add_argument('zimroot', help='Zim Notes directory', metavar='DIR')
+    parser.add_argument('-b', help='Bibtex', metavar='BIBTEX')
+    parser.add_argument('-f', help='Zim Notes file', metavar='FILE')
+    parser.add_argument('--notimecheck', help='No timecheck', action='store_true') 
+    #TODO LOG
+    #parser.add_argument('--log', help='log') #FIXME no option
+    #        #logging.basicConfig(filename=log_filename, filemode='w', level=logging.DEBUG)
+
+    args = parser.parse_args()
+
+
+
     try:
         os.makedirs(os.path.expanduser('~/.zimbibliographer'), exist_ok=True)
     except:
@@ -76,65 +68,21 @@ if __name__ == '__main__':
     logging.basicConfig(filename=log_filename, filemode='w', level=logging.DEBUG)
 
     
-    zim_root = None
-    zim_archive_path = None
-    zim_file_path = None
-    
-    try:
-        opts, args = getopt.getopt(sys.argv[1:],"hb:d:f:", ['help'])
-    except getopt.GetoptError:
-        logging.critical('Wrong option')
-        usage() 
-        sys.exit(2)
-
         
-    checktime = True
-    
-    #FIXME : review args...
-    for opt, arg in opts:   
-        if opt in ('-h', '--help'):
-            logging.debug("Option -h")
-            usage()
-            sys.exit(0)
-        elif opt in '--log':
-            pass
-            #TODO
-            #logging.basicConfig(filename=log_filename, filemode='w', level=logging.DEBUG)
-        elif opt in '--no-timecheck':
-            logging.debug("Option --no-timecheck")
-            checktime = False
-        elif opt in '-b':
-            logging.debug("Option -b: " + str(arg))
-            bibfile = os.path.realpath(arg) 
-        elif opt in '-d':
-            logging.debug("Option -d: " + str(arg))
-            zim_root = os.path.realpath(arg) 
-        elif opt in '-f':
-            logging.debug("Option -f: " + str(arg))
-            zim_file_path = os.path.realpath(arg) 
-
-
-        
-    if zim_file_path == None: 
-        zim_files = zimnotes.get_zim_files(zim_root)
+    if args.f == None: 
+        zim_files = zimnotes.get_zim_files(args.zimroot)
     else:
-        zim_files = [zim_file_path]
+        zim_files = [args.f]
     
-
-    if bibfile == None:
-        logging.critical('missing bibtex option')
-        #TODO
-        sys.exit(1)
 
     logging.info('Processing zim files')
     from ZimBibliographer.processtext import process_text
     from ZimBibliographer.timechecker import TimeChecker
     
     timechecker = TimeChecker('~/.zimbibliographer/time.db', zim_root)
-    #remove zimroot
    
     #FIXME: last arg: accept a list of bibfiles
-    zimnotes.process_zim_file(timechecker, zim_root, zim_files, process_text, checktime, 4, bibfile ) 
+    zimnotes.process_zim_file(timechecker, args.zimroot, zim_files, process_text, args.notimecheck, 4, args.b ) 
 
 
     utils.release_pidfile(lock_file)
