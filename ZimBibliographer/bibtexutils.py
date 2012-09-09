@@ -16,9 +16,9 @@ def get_filedirectory(bibtex):
     with open(bibtex, 'r') as bibfile:
         bibtex_content = bibfile.read()
     filedirectory = re.findall('@comment{jabref-meta: fileDirectory:(.+?);}', bibtex_content, re.DOTALL)
-    filedirectory = re.sub('\n', '', filedirectory[0])
     if filedirectory == []:
         return None
+    filedirectory = re.sub('\n', '', filedirectory[0])
 
     return filedirectory
 
