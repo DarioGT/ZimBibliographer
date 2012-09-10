@@ -9,6 +9,7 @@ setup(
     url          = info.URL,
     author       = "Francois Boulogne",
     author_email = info.EMAIL,
+    license      = info.LICENSE,
     description  = info.SHORT_DESCRIPTION,
     packages = ['ZimBibliographer'],
     scripts     = ['zimbibliographer.py'],
