@@ -26,8 +26,6 @@ import logging
 #our lib...
 from libzimsciunto import zimnotes
 from libzimsciunto import utils
-#from ZimArchivist import timechecker
-#from ZimArchivist import archive
 
 from ZimBibliographer import info
 
