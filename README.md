@@ -10,3 +10,13 @@ License
 
 * The bibtex parser comes from OKFN.
 * This project is released under GPLv3+
+
+
+
+Install
+=======
+Requierements:
+* libZimSciunto: https://github.com/sciunto/libZimSciunto
+
+
+
