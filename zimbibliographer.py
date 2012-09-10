@@ -79,7 +79,7 @@ if __name__ == '__main__':
     from ZimBibliographer.processtext import process_text
     from libzimsciunto.timechecker import TimeChecker
     
-    timechecker = TimeChecker('~/.zimbibliographer/time.db', zim_root)
+    timechecker = TimeChecker('~/.zimbibliographer/time.db', args.zimroot)
    
     #FIXME: last arg: accept a list of bibfiles
     zimnotes.process_zim_file(timechecker, args.zimroot, zim_files, process_text, args.notimecheck, 4, args.b ) 
