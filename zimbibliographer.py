@@ -24,8 +24,8 @@ import logging
 
 
 #our lib...
-from ZimBibliographer import zimnotes
-from ZimBibliographer import utils
+from libzimsciunto import zimnotes
+from libzimsciunto import utils
 #from ZimArchivist import timechecker
 #from ZimArchivist import archive
 
@@ -77,7 +77,7 @@ if __name__ == '__main__':
 
     logging.info('Processing zim files')
     from ZimBibliographer.processtext import process_text
-    from ZimBibliographer.timechecker import TimeChecker
+    from libzimsciunto.timechecker import TimeChecker
     
     timechecker = TimeChecker('~/.zimbibliographer/time.db', zim_root)
    
