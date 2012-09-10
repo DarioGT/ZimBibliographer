@@ -4,7 +4,7 @@
 import re
 import os.path
 
-from ZimBibliographer.utils import get_unexpanded_path
+from libzimsciunto.utils import get_unexpanded_path
 
 from ZimBibliographer.bibtexutils import get_filedirectory
 from ZimBibliographer.bibtexutils import get_entries
