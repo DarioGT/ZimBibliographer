@@ -2,3 +2,8 @@ TODO
 
 * configfile with bibtex sources
 * logs
+
+
+POSSIBLE BUG 
+* timechecker ? does it really work here?
+* Keyerror : check if there is not timecheck modification

@@ -80,7 +80,7 @@ if __name__ == '__main__':
     timechecker = TimeChecker('~/.zimbibliographer/time.db', args.zimroot)
    
     #FIXME: last arg: accept a list of bibfiles
-    zimnotes.process_zim_file(timechecker, args.zimroot, zim_files, process_text, args.notimecheck, 4, args.b ) 
+    zimnotes.process_zim_file(timechecker, args.zimroot, zim_files, process_text, args.notimecheck, 1, args.b ) 
 
 
     utils.release_pidfile(lock_file)
