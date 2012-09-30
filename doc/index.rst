@@ -6,6 +6,22 @@
 Welcome to ZimBibliographer's documentation!
 ============================================
 
+:Author: François Boulogne
+:Source code: `github.com project <https://github.com/sciunto/ZimBibliographer>`_
+:Generated: |today|
+:License: GPL v3
+:Version: |release|
+
+`Zim <http://zim-wiki.org>`_ is a desktop wiki.
+ZimBibliographer is a command line tool using a bibtex to add references.
+
+In your notes, you can write keys like
+  cite{Author1976}
+
+ZimBibliographer will replace that by a link to the file (pdf, ps...)
+included your bibtex you manage elsewhere.
+
+
 Contents:
 
 .. toctree::

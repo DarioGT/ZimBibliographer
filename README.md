@@ -19,4 +19,8 @@ Requierements:
 * libZimSciunto: https://github.com/sciunto/libZimSciunto
 
 
+Documentation
+=============
+http://sciunto.github.com/ZimBibliographer/
+
 
