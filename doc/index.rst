@@ -22,6 +22,11 @@ ZimBibliographer will replace that by a link to the file (pdf, ps...)
 included your bibtex you manage elsewhere.
 
 
+Usage
+-----
+zimbibliographer.py -h
+
+
 Contents:
 
 .. toctree::
