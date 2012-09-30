@@ -34,12 +34,12 @@ def process_text(original_text, bibtex):
     * Replace them
     * write the modified text
 
-    original_text : 
-    bibtex : bibtex
+    :param original_text: String containing the text to process
+    :param bibtex: bibtex file path
 
-    return
-    ------
-    modified text
+    It returns a status (bool == True if something goes wrong)
+    and the updated text.
+    :returns: tuple (bool, string)
     """
 
     #In case of a relative path
@@ -53,11 +53,9 @@ def process_text(original_text, bibtex):
     entries_hash = get_entries(bibtex) 
     
     citecommand = re.compile('cite{([0-9a-zA-Z]+)}')
-
     copy_text = original_text
-
     keys = citecommand.findall(copy_text)
-
+    error = False
     ###########
     # Edit text
     ###########
@@ -71,6 +69,7 @@ def process_text(original_text, bibtex):
                 pubtype = entries_hash[key]['type']
         except KeyError:
             print('Keyerror !')
+            error = True
             continue #next key
 
         #Jabref codes path like ":/tmp/file.pdf:PDF"
@@ -87,6 +86,7 @@ def process_text(original_text, bibtex):
             if filedirectory is None:
                 #TODO...
                 print('filedirectory is none')
+                print('the indication is missing in the bibtex')
                 continue #next key
             path = os.path.join(filedirectory, path) 
             path = get_unexpanded_path(path)
@@ -97,4 +97,4 @@ def process_text(original_text, bibtex):
         internal_link = '[[' + str(path) + '|' + key + ', ' + pubtype + ']]'
         copy_text = re.sub(cite, internal_link, copy_text)
 
-    return copy_text
+    return (error, copy_text)
