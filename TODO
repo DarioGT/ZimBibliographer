@@ -1,5 +1,9 @@
 TODO
 
 * configfile with bibtex sources
+--> ZimBibliographer/processtext.py: should support multiple bibtex files
+
 * logs
 
+BUG
+* case config file for bibtex path empty

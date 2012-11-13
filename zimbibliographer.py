@@ -41,7 +41,8 @@ if __name__ == '__main__':
 
     parser.add_argument('--version', action='version', version=info.NAME + ' ' + info.VERSION) 
     parser.add_argument('zimroot', help='Zim Notes directory', metavar='DIR')
-    parser.add_argument('-b', help='Bibtex', metavar='BIBTEX')
+    parser.add_argument('-b', nargs='*', help='Bibtex', metavar='BIBTEX')
+    parser.add_argument('-c', metavar='CONFIG', required=False, help='Configuration file with bibtex paths')
     parser.add_argument('-f', help='Zim Notes file', metavar='FILE')
     parser.add_argument('--notimecheck', help='No timecheck', action='store_false') 
     #TODO LOG
@@ -65,8 +66,22 @@ if __name__ == '__main__':
     log_filename = os.path.expanduser('~/.zimbibliographer/zimbibliographer.log')
     logging.basicConfig(filename=log_filename, filemode='w', level=logging.DEBUG)
 
-    
-        
+
+    if args.b is not None:
+        #Load specified bib file(s)
+        bib_files = args.b
+    elif args.c is not None:
+        #Load configuration
+        from ZimBibliographer.config import ConfigBibtex
+        location, name = os.path.split(args.c)
+        bibconf = ConfigBibtex(name, location)
+        bib_files = bibconf.get_bibtex_paths()
+    else:
+        #Load default config
+        from ZimBibliographer.config import ConfigBibtex
+        bibconf = ConfigBibtex()
+        bib_files = bibconf.get_bibtex_paths()
+
     if args.f == None: 
         zim_files = zimnotes.get_zim_files(args.zimroot)
     else:
@@ -80,7 +95,7 @@ if __name__ == '__main__':
     timechecker = TimeChecker('~/.zimbibliographer/time.db', args.zimroot)
    
     #FIXME: last arg: accept a list of bibfiles
-    zimnotes.process_zim_file(timechecker, args.zimroot, zim_files, process_text, args.notimecheck, 1, args.b ) 
+    zimnotes.process_zim_file(timechecker, args.zimroot, zim_files, process_text, args.notimecheck, 1, *bib_files) 
 
 
     utils.release_pidfile(lock_file)

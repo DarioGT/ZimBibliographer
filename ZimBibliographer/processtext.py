@@ -27,7 +27,7 @@ from ZimBibliographer.bibtexutils import get_entries
 
 
 
-def process_text(original_text, bibtex):
+def process_text(original_text, *bibtex):
     """
     Core function: process the whole text
     * Track cite{} keys
@@ -35,7 +35,7 @@ def process_text(original_text, bibtex):
     * write the modified text
 
     :param original_text: String containing the text to process
-    :param bibtex: bibtex file path
+    :param bibtex: bibtex file path(s). TODO: does not support multiple bibtex yet!
 
     It returns a status (bool == True if something goes wrong)
     and the updated text.
@@ -43,7 +43,7 @@ def process_text(original_text, bibtex):
     """
 
     #In case of a relative path
-    bibtex = os.path.expanduser(bibtex)
+    bibtex = os.path.expanduser(bibtex[0]) #FIXME : loop over bibtex list
     basepath = os.path.dirname(bibtex)
 
     ###########
