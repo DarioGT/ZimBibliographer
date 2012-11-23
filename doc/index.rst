@@ -24,7 +24,7 @@ included your bibtex you manage elsewhere.
 
 Usage
 -----
-zimbibliographer.py -h
+zimbibliographer -h
 
 
 Contents:

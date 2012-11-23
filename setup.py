@@ -12,5 +12,5 @@ setup(
     license      = info.LICENSE,
     description  = info.SHORT_DESCRIPTION,
     packages = ['ZimBibliographer'],
-    scripts     = ['zimbibliographer.py'],
+    scripts     = ['zimbibliographer'],
 )
