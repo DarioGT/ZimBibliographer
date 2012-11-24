@@ -63,10 +63,31 @@ if __name__ == '__main__':
 
     utils.create_pidfile(lock_file)
 
+    ######
+    #LOGS
+    ######
+    logger = logging.getLogger('zimbibliographer')
+    #logger.setLevel(logging.DEBUG)
+
+    #File
     log_filename = os.path.expanduser('~/.zimbibliographer/zimbibliographer.log')
-    logging.basicConfig(filename=log_filename, filemode='w', level=logging.DEBUG)
+    filehandler = logging.FileHandler(log_filename)
+    filehandler.setLevel(logging.DEBUG)
+    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    filehandler.setFormatter(formatter)
+    logger.addHandler(filehandler)
+
+    #Console
+    consolehandler = logging.StreamHandler()
+    consolehandler.setLevel(logging.ERROR)
+    formatter = logging.Formatter('%(name)s - %(levelname)s - %(message)s')
+    consolehandler.setFormatter(formatter)
+    logger.addHandler(consolehandler)
 
 
+    #####
+    # Process args
+    #####
     if args.b is not None:
         #Load specified bib file(s)
         bib_files = args.b
@@ -88,14 +109,12 @@ if __name__ == '__main__':
         zim_files = [args.f]
     
 
-    logging.info('Processing zim files')
+    logger.info('Processing zim files')
     from ZimBibliographer.processtext import process_text
     from libzimsciunto.timechecker import TimeChecker
     
     timechecker = TimeChecker('~/.zimbibliographer/time.db', args.zimroot)
    
-    #FIXME: last arg: accept a list of bibfiles
     zimnotes.process_zim_file(timechecker, args.zimroot, zim_files, process_text, args.notimecheck, 1, *bib_files) 
-
 
     utils.release_pidfile(lock_file)
