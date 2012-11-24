@@ -1,4 +1,10 @@
 ##################
+# v0.
+##################
+* handle multiple bibtex files
+* read configuration file giving bibtex paths
+
+##################
 # v0.1 2012-09-30
 ##################
 * First release
