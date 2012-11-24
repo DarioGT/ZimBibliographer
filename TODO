@@ -5,7 +5,9 @@ TODO
 -- Must be OK now. But there is no double key conflict handling
 
 
-* logs
+* logs : 
+    - rewrite how they are created 
+    - log messages
 
 BUG
 * case config file for bibtex path empty
