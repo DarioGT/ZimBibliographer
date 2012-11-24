@@ -2,6 +2,8 @@ TODO
 
 * configfile with bibtex sources
 --> ZimBibliographer/processtext.py: should support multiple bibtex files
+-- Must be OK now. But there is no double key conflict handling
+
 
 * logs
 

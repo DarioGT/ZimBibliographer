@@ -42,16 +42,23 @@ def process_text(original_text, *bibtex):
     :returns: tuple (bool, string)
     """
 
-    #In case of a relative path
-    bibtex = os.path.expanduser(bibtex[0]) #FIXME : loop over bibtex list
-    basepath = os.path.dirname(bibtex)
+    entries_hash = {}
+    for thisbibtex in bibtex:
+        #In case of a relative path
+        thisbibtex = os.path.expanduser(thisbibtex) 
 
-    ###########
-    # Bibtex
-    ###########
-    filedirectory = get_filedirectory(bibtex)
-    entries_hash = get_entries(bibtex) 
-    
+        ###########
+        # Bibtex
+        ###########
+        filedirectory = get_filedirectory(thisbibtex)
+        theseentries_hash = get_entries(thisbibtex) 
+
+        #Append the filedirectory in each entry
+        for el in theseentries_hash:
+            theseentries_hash[el]['filedirectory'] = filedirectory
+
+        entries_hash.update(theseentries_hash)
+
     citecommand = re.compile('cite{([0-9a-zA-Z]+)}')
     copy_text = original_text
     keys = citecommand.findall(copy_text)
@@ -88,7 +95,7 @@ def process_text(original_text, *bibtex):
                 print('filedirectory is none')
                 print('the indication is missing in the bibtex')
                 continue #next key
-            path = os.path.join(filedirectory, path) 
+            path = os.path.join(entries_hash[key]['filedirectory'], path) 
             path = get_unexpanded_path(path)
 
 
