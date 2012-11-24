@@ -24,7 +24,10 @@ included your bibtex you manage elsewhere.
 
 Usage
 -----
-zimbibliographer -h
+
+.. code-block:: sh
+
+    zimbibliographer -h
 
 
 Contents:
@@ -32,6 +35,21 @@ Contents:
 .. toctree::
    :maxdepth: 2
 
+
+
+Configuration
+=============
+
+The default file is ~/.zimbibliographer/bibtex.conf
+
+It's syntax looks like:
+
+.. code-block:: text 
+
+    [mybiblio]
+    path=~/biblio/biblio.bib
+    [books]
+    path=~/books/books.bib
 
 
 Indices and tables
