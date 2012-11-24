@@ -94,7 +94,8 @@ def process_text(original_text, *bibtex):
             pass
         else:
             if filedirectory is None:
-                #TODO...
+                #CHECKME: is it really none. The best would be to write a unittest
+                #TODO... log
                 print('filedirectory is none')
                 print('the indication is missing in the bibtex')
                 continue #next key
