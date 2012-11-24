@@ -20,6 +20,9 @@
 import re
 import os.path
 
+import logging
+logger = logging.getLogger('zimbibliographer.processtext')
+
 from libzimsciunto.utils import get_unexpanded_path
 
 from ZimBibliographer.bibtexutils import get_filedirectory
@@ -67,7 +70,7 @@ def process_text(original_text, *bibtex):
     # Edit text
     ###########
     for key in keys:
-        print(key)
+        logger.debug('key %s', key)
         try:
             path = entries_hash[key]['file']
             if entries_hash[key]['type'] == 'article':
@@ -75,7 +78,7 @@ def process_text(original_text, *bibtex):
             else:
                 pubtype = entries_hash[key]['type']
         except KeyError:
-            print('Keyerror !')
+            logger.error('Unknown key: %s', key)
             error = True
             continue #next key
 
