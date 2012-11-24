@@ -3,6 +3,7 @@
 ##################
 * handle multiple bibtex files
 * read configuration file giving bibtex paths
+* improved loggers
 
 ##################
 # v0.1 2012-09-30
