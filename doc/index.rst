@@ -36,6 +36,27 @@ Contents:
    :maxdepth: 2
 
 
+How to install
+==============
+
+Requirements
+------------
+
+* python 3
+* `python-libZimSciunto <http://pypi.python.org/pypi/libZimSciunto/>`_
+
+Install
+-------
+
+A package is available on `pypi <http://pypi.python.org/pypi/ZimBibliographer/>`_.
+Otherwise, you can install it by running:
+
+.. code-block:: sh
+
+    python setup.py install --root='/'
+
+
+
 
 Configuration
 =============
