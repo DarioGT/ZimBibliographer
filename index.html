@@ -54,7 +54,7 @@
 </tr>
 <tr class="field-even field"><th class="field-name">Source code:</th><td class="field-body"><a class="reference external" href="https://github.com/sciunto/ZimBibliographer">github.com project</a></td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Generated:</th><td class="field-body">September 30, 2012</td>
+<tr class="field-odd field"><th class="field-name">Generated:</th><td class="field-body">November 25, 2012</td>
 </tr>
 <tr class="field-even field"><th class="field-name">License:</th><td class="field-body">GPL v3</td>
 </tr>
@@ -72,12 +72,43 @@ ZimBibliographer is a command line tool using a bibtex to add references.</p>
 included your bibtex you manage elsewhere.</p>
 <div class="section" id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
-<p>zimbibliographer.py -h</p>
+<div class="highlight-sh"><div class="highlight"><pre>zimbibliographer -h
+</pre></div>
+</div>
 <p>Contents:</p>
 <div class="toctree-wrapper compound">
 <ul class="simple">
 </ul>
 </div>
+</div>
+</div>
+<div class="section" id="how-to-install">
+<h1>How to install<a class="headerlink" href="#how-to-install" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>python 3</li>
+<li><a class="reference external" href="http://pypi.python.org/pypi/libZimSciunto/">python-libZimSciunto</a></li>
+</ul>
+</div>
+<div class="section" id="install">
+<h2>Install<a class="headerlink" href="#install" title="Permalink to this headline">¶</a></h2>
+<p>A package is available on <a class="reference external" href="http://pypi.python.org/pypi/ZimBibliographer/">pypi</a>.
+Otherwise, you can install it by running:</p>
+<div class="highlight-sh"><div class="highlight"><pre>python setup.py install --root<span class="o">=</span><span class="s1">&#39;/&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="configuration">
+<h1>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h1>
+<p>The default file is ~/.zimbibliographer/bibtex.conf</p>
+<p>It&#8217;s syntax looks like:</p>
+<div class="highlight-text"><div class="highlight"><pre>[mybiblio]
+path=~/biblio/biblio.bib
+[books]
+path=~/books/books.bib
+</pre></div>
 </div>
 </div>
 <div class="section" id="indices-and-tables">
@@ -103,6 +134,12 @@ included your bibtex you manage elsewhere.</p>
 </li>
 </ul>
 </li>
+<li><a class="reference internal" href="#how-to-install">How to install</a><ul>
+<li><a class="reference internal" href="#requirements">Requirements</a></li>
+<li><a class="reference internal" href="#install">Install</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#configuration">Configuration</a></li>
 <li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
 </ul>
 
