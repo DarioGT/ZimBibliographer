@@ -66,8 +66,9 @@ if __name__ == '__main__':
     ######
     #LOGS
     ######
-    logger = logging.getLogger('zimbibliographer')
-    #logger.setLevel(logging.DEBUG)
+    logger = logging.getLogger()
+    logger.setLevel(logging.DEBUG)
+    logger.name = 'zimbibliographer'
 
     #File
     log_filename = os.path.expanduser('~/.zimbibliographer/zimbibliographer.log')
