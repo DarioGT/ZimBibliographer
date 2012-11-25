@@ -11,6 +11,7 @@ setup(
     author_email = info.EMAIL,
     license      = info.LICENSE,
     description  = info.SHORT_DESCRIPTION,
-    packages = ['ZimBibliographer'],
-    scripts     = ['zimbibliographer'],
+    packages     = ['ZimBibliographer'],
+    scripts      = ['zimbibliographer'],
+    requires     = ['libZimSciunto (>=0.3)'],
 )
