@@ -8,7 +8,7 @@ NAME = "ZimBibliographer"
 URL = "https://github.com/sciunto/ZimBibliographer"
 LICENSE = "GPLv3+"
 EMAIL = "fboulogne@sciunto.org"
-VERSION = "0.1"
+VERSION = "0.2"
 
 SHORT_DESCRIPTION = "ZimBibliographer add references from Bibtex in your zim notes"
 
