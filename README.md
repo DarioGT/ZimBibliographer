@@ -24,3 +24,8 @@ Documentation
 http://sciunto.github.com/ZimBibliographer/
 
 
+Download
+========
+
+http://sciunto.org/source/
+
