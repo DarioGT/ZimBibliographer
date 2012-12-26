@@ -27,5 +27,5 @@ http://sciunto.github.com/ZimBibliographer/
 Download
 ========
 
-http://sciunto.org/source/
+http://source.sciunto.org/zimbibliographer/
 
